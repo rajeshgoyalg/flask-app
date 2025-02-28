@@ -26,13 +26,14 @@ jobs:
         run: |
           docker build -t rajeshgoyalg/flask-app:latest .
 
-      - name: Install Trivy  # ✅ Add this step before using Trivy
-        run: |
-          curl -sfL https://aquasecurity.github.io/trivy/scripts/install.sh | sh
+      - name: Install Trivy  # ✅ Use official Trivy GitHub Action
+        uses: aquasecurity/trivy-action@master
           
       - name: Run Security Scan
         run: |
-          trivy image rajeshgoyalg/flask-app:latest
+          which trivy  # ✅ Check if Trivy is installed
+          trivy --version  # ✅ Verify version
+          trivy image rajeshgoyalg/flask-app:latest  # ✅ Run security scan
 
       - name: Push Docker Image
         run: |
