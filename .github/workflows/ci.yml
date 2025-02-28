@@ -33,6 +33,7 @@ jobs:
         run: |
           which trivy  # ✅ Check if Trivy is installed
           trivy --version  # ✅ Verify version
+          docker images # debugging
           trivy image rajeshgoyalg/flask-app:latest  # ✅ Run security scan
 
       - name: Push Docker Image
